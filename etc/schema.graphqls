@@ -1,0 +1,24 @@
+# Copyright © MageWorx, Inc. All rights reserved.
+# See COPYING.txt for license details.
+type Query {
+    mwDonationsInfo: MwDonationsInfo @doc(description: "The query returns information about a Donations") @resolver(class: "MageWorx\\DonationsGraphQl\\Model\\Resolver\\DonationsInfo")
+}
+
+type MwDonationsInfo {
+    min_value: Float @doc(description: "Minimum donation amount")
+    default_description: String @doc(description: "Donation default description")
+    amount_placeholder: String @doc(description: "Donation amount placeholder")
+    default_charity_id: Int @doc(description: "Default organization")
+    predefined_values: [Float] @doc(description: "Predefined donation amounts")
+    allow_round_up: Boolean @doc(description: "Allow Round Up Donation")
+    is_gift_aid_allowed: Boolean @doc(description: "Indicates if gift aid donations are allowed")
+    gift_aid_message: String @doc(description: "Gift Aid confirmation message")
+    charities: [MwCharity] @doc(description: "An array of Charities")
+}
+
+type MwCharity @doc(description: "MwCharity defines all Charity information") {
+    id: Int @doc(description: "Charity ID")
+    name: String @doc(description: "Charity name")
+    description: String @doc(description: "Charity description")
+    sort_order: Int @doc(description: "Sort Order")
+}
