@@ -39,6 +39,7 @@ class CharitiesDataProvider
         $charityCollection = $this->charityRepository->getListCharity();
         $charityCollection->addFieldToFilter(CharityInterface::IS_ACTIVE, 1);
         $charityCollection->addStoreFilter($storeId);
+        $charityCollection->addLocales($storeId);
 
         if ($charityCollection->count() > 0) {
             $data = [];

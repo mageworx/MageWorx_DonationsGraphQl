@@ -60,15 +60,16 @@ class AddedDonation implements ResolverInterface
             return null;
         }
 
-        $details   = $this->serializer->unserialize($details);
-        $ukAddress = isset($details['uk_address_for_gift_aid']) ? $details['uk_address_for_gift_aid'] : null;
+        $details      = $this->serializer->unserialize($details);
+        $isUseRoundUp = isset($details['isUseDonationRoundUp']) ? (bool)$details['isUseDonationRoundUp'] : null;
+        $ukAddress    = isset($details['uk_address_for_gift_aid']) ? $details['uk_address_for_gift_aid'] : null;
 
         return [
             'charity_id'       => isset($details['charity_id']) ? (int)$details['charity_id'] : null,
             'charity_name'     => isset($details['charity_title']) ? $details['charity_title'] : null,
             'global_amount'    => isset($details['global_donation']) ? (float)$details['global_donation'] : null,
             'amount'           => isset($details['donation']) ? (float)$details['donation'] : null,
-            'round_up'         => isset($details['donation_roundup']) ? (float)$details['donation_roundup'] : null,
+            'round_up'         => $isUseRoundUp,
             'gift_aid_address' => $ukAddress
         ];
     }

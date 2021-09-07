@@ -52,15 +52,16 @@ class DonationsInfo implements ResolverInterface
         $storeId = (int)$context->getExtensionAttributes()->getStore()->getId();
 
         return [
-            'min_value'           => $this->helperData->getMinimumDonation(),
-            'default_description' => $this->helperData->getDefaultDescription(),
-            'amount_placeholder'  => $this->helperData->getAmountPlaceholder(),
-            'default_charity_id'  => $this->helperData->getDefaultCharity(),
-            'predefined_values'   => $this->getPredefinedValues(),
-            'allow_round_up'      => $this->helperData->isShowRoundUpDonation(),
-            'is_gift_aid_allowed' => $this->helperData->isGiftAidDonationsEnabled(),
-            'gift_aid_message'    => $this->helperData->getGiftAidDonationsMessage(),
-            'charities'           => $this->charitiesDataProvider->getData($storeId)
+            'min_value'                  => $this->helperData->getMinimumDonation(),
+            'default_description'        => $this->helperData->getDefaultDescription(),
+            'amount_placeholder'         => $this->helperData->getAmountPlaceholder(),
+            'default_charity_id'         => $this->helperData->getDefaultCharity(),
+            'predefined_values'          => $this->getPredefinedValues(),
+            'allow_round_up'             => $this->helperData->isShowRoundUpDonation(),
+            'enable_round_up_by_default' => $this->helperData->isRoundUpSelectedByDefault(),
+            'is_gift_aid_allowed'        => $this->helperData->isGiftAidDonationsEnabled(),
+            'gift_aid_message'           => $this->helperData->getGiftAidDonationsMessage(),
+            'charities'                  => $this->charitiesDataProvider->getData($storeId)
         ];
     }
 
