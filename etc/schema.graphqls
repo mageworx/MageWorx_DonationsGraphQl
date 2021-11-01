@@ -9,17 +9,23 @@ type Mutation {
  }
 
 type MwDonationsInfo {
-    min_value: Float @doc(description: "Minimum donation amount")
+    min_value: DonationAmount @doc(description: "Minimum donation amount")
     default_description: String @doc(description: "Donation default description")
     amount_placeholder: String @doc(description: "Donation amount placeholder")
     default_charity_id: Int @doc(description: "Default organization")
-    predefined_values: [Float] @doc(description: "Predefined donation amounts")
+    predefined_values: [DonationAmount] @doc(description: "Predefined donation amounts")
     is_donation_custom_amount_allowed: Boolean @doc(description: "Indicates if donation custom amount are allowed")
     allow_round_up: Boolean @doc(description: "Allow Round Up Donation")
     enable_round_up_by_default: Boolean @doc(description: "Enable Round Up by default")
     is_gift_aid_allowed: Boolean @doc(description: "Indicates if gift aid donations are allowed")
     gift_aid_message: String @doc(description: "Gift Aid confirmation message")
     charities: [MwCharity] @doc(description: "An array of Charities")
+}
+
+type DonationAmount {
+    value: Float @doc(description: "Amount Value")
+    currency_code: String @doc(description: "A three-letter currency code, such as USD or EUR")
+    label: String @doc(description: "Amount Label")
 }
 
 type MwCharity @doc(description: "MwCharity defines all Charity information") {
@@ -49,8 +55,8 @@ type Cart {
 type AddedMwDonation {
     charity_id: Int @doc(description: "Charity ID")
     charity_name: String @doc(description: "Charity name")
-    global_amount: Float @doc(description: "Global donation amount")
-    amount: Float @doc(description: "Donation amount")
+    global_amount: DonationAmount @doc(description: "Global donation amount")
+    amount: DonationAmount @doc(description: "Donation amount")
     round_up: Boolean @doc(description: "Round up")
     gift_aid_address: String @doc(description: "UK address")
 }
